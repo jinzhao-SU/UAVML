@@ -1,0 +1,37 @@
+{
+  "exp": {
+    "name": "uav_prediction"
+  },
+  "data_loader": {
+    "name": "c3d_lstm_loader.C3DLSTMDataLoader",
+    "path": "/data/zzhao/AMPS-UAV-C3D-LSTM/data/1024_samples/",
+    "input": "uav_input.npy",
+    "label": "uav_ground_truth.npy"
+  },
+  "model":{
+    "name": "c3d_lstm_trainer.C3DLSTMModel",
+    "learning_rate": 0.001
+  },
+  "trainer":{
+    "name": "c3d_lstm_trainer.C3DLSTMTrainer",
+    "num_epochs": 5,
+    "batch_size": 4,
+    "validation_split":0.25,
+    "verbose_training": 1,
+    "optimizer": "adam",
+    "loss": "binary_crossentropy",
+    "shuffle": "True"
+  },
+  "tester":{
+    "name": "c3d_lstm_tester.C3DLSTMTester",
+    "verbose_testing": 1
+  },
+  "callbacks":{
+    "checkpoint_monitor": "val_acc",
+    "checkpoint_mode": "auto",
+    "checkpoint_save_best_only": true,
+    "checkpoint_save_weights_only": true,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}
